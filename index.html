@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Research Engineer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: #fafafa;
+        }
+
+        nav {
+            background: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            padding: 0 1rem;
+        }
+
+        nav a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #b76e79, #c9a38c);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: #b76e79;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f7f7f7 0%, #ffffff 100%);
+            margin: -3rem -2rem 4rem -2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8b9d83, #b76e79, #c9a38c);
+        }
+
+        .hero-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, #e8ebe7 0%, #f0e5e0 100%);
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #8b9d83;
+            font-size: 0.85rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .hero-photo svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 0.5rem;
+            opacity: 0.6;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            color: #1a202c;
+            font-weight: 600;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: #b76e79;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        h2 {
+            color: #1a202c;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #b76e79, #c9a38c);
+            border-radius: 2px;
+        }
+
+        h3 {
+            color: #2d3748;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e8ebe7;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(183, 110, 121, 0.12);
+            border-color: #c9a38c;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #1a202c;
+            font-size: 1.4rem;
+        }
+
+        .card-meta {
+            color: #8b9d83;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #b76e79, #c9a38c);
+            color: white;
+            padding: 0.85rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 12px rgba(183, 110, 121, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(183, 110, 121, 0.3);
+        }
+
+        .about-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            border: 1px solid #e8ebe7;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .about-content p {
+            margin-bottom: 1.2rem;
+            color: #4a5568;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #8b9d83, #9aad8f);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 2px 6px rgba(139, 157, 131, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px);
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #4a5568;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid #b76e79;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem;
+            margin-top: 5rem;
+            border-top: 3px solid #b76e79;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        .resume-container {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 12px;
+            border: 2px dashed #c9a38c;
+        }
+
+        .resume-container h3 {
+            color: #b76e79;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .resume-container p {
+            color: #4a5568;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            nav ul {
+                gap: 1.2rem;
+            }
+
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-photo {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home" onclick="showPage('home')">Home</a></li>
+            <li><a href="#about" onclick="showPage('about')">About</a></li>
+            <li><a href="#research" onclick="showPage('research')">Research</a></li>
+            <li><a href="#blog" onclick="showPage('blog')">Blog</a></li>
+            <li><a href="#media" onclick="showPage('media')">Media Features</a></li>
+            <li><a href="#resume" onclick="showPage('resume')">Resume</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <div class="hero">
+                <img src="IMG_2469.jpeg" alt="Smriti Singh" style="width: 180px; height: 180px; border-radius: 50%; margin: 0 auto 2rem; display: block; border: 4px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.08); object-fit: cover;">
+                <h1>Smriti Singh</h1>
+                <p class="subtitle">ML Research Engineer</p>
+                <p>Exploring the future of safe superintelligence in society</p>
+            </div>
+            
+            <div class="intro-text">
+                Hi there! I'm a machine learning research engineer focused on building AI that's both, useful and safe. 
+                I work at the intersection of applied ML engineering, fairness research, and AI alignment understanding. 
+                I am passionate about solving the practical problems of today with an emphasis on designing systems that align with human values and have a long-term positive impact, while thinking carefully about the superintelligent systems we may rely on tomorrow.         
+                I believe that diverse perspectives are crucial to building effective, ethical, safe superintelligent systems.
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="#research" onclick="showPage('research')" class="btn">Explore My Research</a>
+            </div>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div id="about" class="page">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>
+                    I'm a Machine Learning Research Engineer with expertise in developing and deploying cutting-edge AI systems responsibly. 
+                    My work focuses on using AI to solve challenging problems while ensuring alignment with human values and ethics. 
+                    I believe that the future of humanity is deeply intertwined with the development of safe superintelligence systems that can augment our capabilities without compromising our core values.
+                    To me, this means prioritizing using AI to solve problems that matter most to people today, while continuing to ask the hard questions about how we can ensure that superintelligence is safe, emotionally intelligent, ethically aligned and fair.
+                </p>
+                <p>
+                    I hold an M.S. in computer science from The University of Texas at Austin, with a minor in computational linguistics and an NSF-certified portfolio in ethical AI. 
+                    My academic journey has equipped me with a strong foundation in both theoretical and applied machine learning, allowing me to tackle complex challenges effectively.
+                    I am currently a ML research engineer at Zacks Investment Research, where I collaborate with a diverse team of talented people to push the boundaries of generative AI in finance.
+                    I endeavor to contribute to the AI research community through publications that span fairness in AI, emotional intelligence in AI, interpretability, and alignment strategies for large language models.
+                </p>
+                <p>
+                    When I'm not immersed in research, you can find me listening to a good podcast, writing for my blog, or watching the latest hit series on Netflix!
+                </p>
+            </div>
+
+            <h3>My Story</h3>
+            <div style="background: linear-gradient(135deg, #f7f7f7 0%, #ffffff 100%); padding: 2.5rem; border-radius: 12px; margin-bottom: 2.5rem; border-left: 4px solid #b76e79; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                <p style="color: #4a5568; line-height: 1.9; margin-bottom: 1.2rem;">
+                    Ever since I was a child, I deeply believed in the power of language, technology and science to transform lives. 
+                    Growing up, I grappled with whether I wanted to be a writer, an engineer, or a scientist.
+                    It wasn't until I discovered the field of natural language processing during my undergraduate, that I realized I could combine all three passions into a single career.              
+                </p>
+                <p style="color: #4a5568; line-height: 1.9; margin-bottom: 1.2rem;">
+                    My journey into the world of AI began with baby steps. As time passed, I became increasingly interested in the ethical implications of AI systems and the importance of building models that are not only powerful but also aligned with human values.
+                    My research started out focused on fairness and safety, spanning topics like sexism detection, threat detection using NLP, and multimodal misogyny detection in memes. 
+                    Over time, I began to realize that the real problem was not just the visibe biases in models, but the underlying misalignment between AI objectives and human values.
+                    I also realised that any technology is only as good as the challenges it can solve effectively in high stake domains, and so I expanded my professional focus to applied ML engineering for finance.
+                </p>
+                <p style="color: #4a5568; line-height: 1.9; margin-bottom: 1.2rem;">
+                    These experiences shaped a clear mission for my work: to build AI systems that are not only intelligent, but emotionally aware, interpretable, and aligned with human intent. 
+                    I believe that the superintelligence without emotional intelligence risks amplifying harm rather than insight, and that interpretability is essential for ensuring safety, accountability, and trust. 
+                    Equally important, AI must move beyond theoretical benchmarks to solve real problems at scale, particularly in high-stakes domains (like finance!). 
+                    Rooted in the firm belief that technology without intentional inclusion is just sophisticated discrimination, my approach centers on developing safe, fair systems that solve real-world problems.
+                </p>
+                <p style="color: #4a5568; line-height: 1.9;">
+                    My perspective is shaped by both privilege and responsibility. I am the first woman in my family to pursue a career, made possible by parents who believe deeply in equality and consistently support my ambitions. 
+                    I am especially conscious that I stand on opportunities my mother sacrificed, and that awareness informs a core principle of my work: technology must not compound harm for underprivileged or historically excluded communities. 
+                    I am a strong advocate for women in STEM and for gender equity in education and professional spaces, not as an abstract ideal but as a necessary condition for building better systems. 
+                    My father’s career in technology was a defining influence, instilling both technical curiosity and a respect for disciplined engineering. 
+                    In a field moving at unprecedented speed, I hope my work contributes to a more deliberate trajectory: one where progress toward superintelligence is matched by interpretability, emotional awareness, and a commitment to fairness and safety, and where others are inspired to build not just faster systems, but more responsible ones.
+                </p>
+            </div>
+
+            <h3>Technical Expertise</h3>
+            <div class="skills">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">Agentic AI</span>
+                <span class="skill-tag">Advanced Context Engineering</span>
+                <span class="skill-tag">LLMs as judges</span>
+                <span class="skill-tag">Truthfulness QA Modelling</span>
+                <span class="skill-tag">LLM Finetuning</span>
+                <span class="skill-tag">NL2SQL with LLMs</span>
+                <span class="skill-tag">Self improvement in LLMs</span>
+                <span class="skill-tag">Model Interpretability</span>
+                <span class="skill-tag">ML system design</span>
+            </div>
+
+            <h3>Education</h3>
+            <div class="card">
+                <h3>M.S. in Computer Science</h3>
+                <div class="card-meta">The University of Texas at Austin | 2024</div>
+                <p> With a minor in computational linguistics and an NSF-certified portfolio in ethical AI, my time at UT Austin focused on developing a deep understanding of LLMs. 
+                    Under the guidance of my advisor, Dr. Jessy Li, my thesis (published at NAACL 2024) explored how LLMs perceive emotion triggers in text, leading to insights on enhancing emotional intelligence in AI systems.
+                    I also wrote a paper on multimodal misogyny detection in memes with Dr. Raymond Mooney, which was published at ACL 2023. 
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>B. Tech. in Information Technology</h3>
+                <div class="card-meta">Manipal Institute of Technology | 2022</div>
+                <p> With a minor in data science, my undergraduate years focused on building the foundations of applied research engineering.
+                    My published research during this time spanned across topics like sexism detection, child predator detection, and threat detection. 
+                </p>
+            </div>
+        </div>
+
+        <!-- RESEARCH PAGE -->
+        <div id="research" class="page">
+            <h2>Research</h2>
+            
+            <h3>Research Interests</h3>
+            <div class="about-content" style="margin-bottom: 3rem;">
+                <p>
+                    My research focuses on safe superintelligence from an ethical and applied perspective. 
+                    I aim to contribute to the larger understanding of how we can build AI systems that can not only effectively solve problems in high stake domains, but is also aligned with human values, emotionally intelligent, interpretable, and capable of solving real-world problems effectively. 
+                    I'm particularly interested in the following broad topics: 
+                </p>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem; line-height: 2;">
+                    <li><strong>The intersection of alignment and interpretability in large language models: </strong>
+                        Investigating how interpretability techniques can be used to understand, evaluate, and improve alignment in large language models, with an emphasis on making internal representations, objectives, and failure modes transparent for safe deployment.</li>
+                        
+                    <li><strong>The role of emotions in safe superintelligence: </strong>
+                        Studying emotional intelligence as a component of alignment, including how modeling affect, intent, and social context can contribute to safer behavior, reduced harm, and more human-aligned decision-making in advanced AI systems.</li>
+                        
+                    <li><strong>Equifinality, evolution, and evaluating intelligence in AI: </strong>
+                        Examining how different architectures, training regimes, and objectives converge to similar psychological/neurological phenomena in different models and humans, and what this implies for defining, measuring, and stress-testing intelligence beyond narrow benchmark performance.</li>
+                        
+                    <li><strong>Fairness and bias identification and mitigation in AI systems: </strong>
+                        Developing methods to detect, analyze, and mitigate bias in language and multimodal models, with a focus on scalable, deployment-ready approaches that promote fairness without compromising system performance.</li>                            
+                </ul>
+                <p style="margin-top: 1rem;">
+                    I believe that addressing these topics is crucial for ensuring that AI systems are developed and deployed in ways that align with human values and societal well-being.
+                    That said, I am also deeply committed to applied research that solves real problems effectively in high-stakes domains like finance, healthcare, and education.
+                    If any of these areas resonate with you, please feel free to reach out! 
+                    I'd love to connect with fellow researchers, practitioners, and enthusiasts who share a passion for building safe, fair, and impactful AI systems.
+                    Email: smritisingh26@utexas.edu
+                </p>
+            </div>
+
+            <h3>Select Publications</h3>
+            
+            <div class="card">
+                <h3>Born with a SilverSpoon? Investigating socioeconomic bias in LLMs</h3>
+                <div class="card-meta"> Smriti Singh, Shuvam Keshari, Vinija Jain, Aman Chadha | Evaluating the evolving LLM lifecycle @ NeurIPS 2025 </div>
+                <p>
+                    In this paper, we investigate the presence of socioeconomic bias in large language models. 
+                    To this end, we introduce a novel dataset "SILVERSPOON", consisting of 12000 samples that provide a multifaceted analysis of this complex issue.  
+                    We evaluate several state-of-the-art LLMs on this dataset and find that models exhibit implicit and explicit socioeconomic bias. 
+                    This is further augmented by stereotypes emanating from a combination of gender bias and racial bias. . 
+                </p>
+                <a href="https://arxiv.org/pdf/2403.14633" class="btn">View Paper</a>
+            </div>
+
+            <div class="card">
+                <h3>From Prejudice to Parity: A New Approach to Debiasing Large Language Model Word Embeddings</h3>
+                <div class="card-meta"> Aishik Rakshit, Smriti Singh, Shuvam Keshari, Vinija Jain, Aman Chadha | COLING | 2025</div>
+                <p>
+                    In this work, we propose "DeepSoftDebias", an algorithm that uses a neural network to perform ‘soft debiasing’.
+                    We exhaustively evaluate this algorithm across a variety of state-of-theart datasets, accuracy metrics, and challenging NLP tasks. 
+                    We find that DeepSoftDebias outperforms the current state-of-the-art methods at reducing bias across gender, race, and religion.
+                </p>
+                <a href="https://aclanthology.org/2025.coling-main.450/" class="btn">View Paper</a>
+            </div>
+
+            <div class="card">
+                <h3>Language Models (Mostly) Do Not Consider Emotion Triggers When Predicting Emotion</h3>
+                <div class="card-meta">Smriti Singh, Cornelia Caragea, Junyi Jessy Li| NAACL| 2024</div>
+                <p>
+                    Situations and events evoke emotions in humans, but to what extent do they inform the prediction of emotion detection models? 
+                    This work investigates how well human-annotated emotion triggers correlate with features that models deemed salient in their prediction of emotions.
+                    Our analysis reveals that emotion triggers are largely not considered salient features for emotion prediction models, instead there is intricate interplay between various features and the task of emotion detection.
+                </p>
+                <a href="https://aclanthology.org/2024.naacl-short.51.pdf" class="btn">View Paper</a>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: white; border-radius: 12px; border: 1px solid #e8ebe7;">
+                <p style="color: #4a5568; margin-bottom: 1.5rem; font-size: 1.05rem;">
+                    For a complete list of my publications
+                </p>
+                <a href="https://scholar.google.com/citations?hl=en&user=idOI-IAAAAAJ&view_op=list_works&gmla=AElLoL1pwyTe1G5lq56vats7SexPvuNdj2AOWsV_1tP9nGNsVyx0NtSf3LjI6vn7esNuYOwSrtLtU1Jtd7DKj_25" target="_blank" class="btn">View Google Scholar Profile</a>
+            </div>
+        </div>
+
+        <!-- BLOG PAGE -->
+        <div id="blog" class="page">
+            <h2>Blog</h2>
+
+            <div class="card">
+                <h3>When Prediction Looks Like Purpose: Understanding the Paradoxical Emergent Behavior in LLMs </h3>
+                <div class="card-meta">November 2025</div>
+                <p>
+                    An exploration of how large language models exhibit goal-directed behavior despite being trained solely for next-word prediction, and what this means for AI alignment.
+                </p>
+                <a href="blog-post-2.html" class="btn">Read More</a>
+            </div>
+            
+            <div class="card">
+                <h3>Does "PhD level" intelligence reflect gender equality?</h3>
+                <div class="card-meta">October 2025</div>
+                <p>
+                    A deep dive into how even the best state of the art large language models exhibit regressive stereotypes.
+                </p>
+                <a href="blog-post-1.html" class="btn">Read More</a>
+            </div>
+
+        </div>
+
+        <!-- MEDIA PAGE -->
+        <div id="media" class="page">
+            <h2>Media Features</h2>
+            
+            <div class="card">
+                <h3>NeurIPS 2025: Investigating socioeconomic bias in LLMs</h3>
+                <div class="card-meta"> Women in AI Research Podcast | December 2025</div>
+                <p>
+                    Featured on the WiAIR podcast after presenting our findings on socioeconomic bias in large language models and discussing their implications.
+                </p>
+                <a href="https://youtu.be/Qqpv8lFg4cY?si=20EjDaeyd81-80X9" class="btn">Watch Video</a>
+            </div>
+
+            <div class="card">
+                <h3>Featured Article:The Urgency of Fairness and Interpretability in AI </h3>
+                <div class="card-meta">The AI Journal | November 2025</div>
+                <p>
+                    This article explains why fairness and interpretability are critical components of responsible AI development, and how we cannot afford to wait to address these issues.
+                </p>
+                <a href="https://aijourn.com/the-urgency-of-fairness-and-interpretability-in-ai-why-we-cant-afford-to-wait/" class="btn">Read Article</a>
+            </div>
+
+            <div class="card">
+                <h3> Article Feature : Would an AI judge be able to efficiently dispense justice?</h3>
+                <div class="card-meta"> The New Scientist | June 2024</div>
+                <p>
+                    This article talks about our research on the potential and challenges of using AI as judges in legal systems.
+                </p>
+                <a href="https://www.newscientist.com/article/2434100-would-an-ai-judge-be-able-to-efficiently-dispense-justice/" class="btn">Read Article</a>
+            </div>
+
+            <div class="card">
+                <h3>Article Feature: The role of domain specific pretraining in digital discourse analysis</h3>
+                <div class="card-meta"> The University of Texas at Austin - CS Newsletter | November 2023</div>
+                <p>
+                    My findings on the technical and social challenges around multimodal misogyny detection in memes were featured in this article by UT Austin's CS department.
+                </p>
+                <a href="https://www.cs.utexas.edu/news/2023/role-domain-specific-pretraining-digital-discourse-analysis" class="btn">Read Article</a>
+            </div>
+
+            <div class="card">
+                <h3>Invited Talk: Using NLP to prevent the spread of gendered health misinformation</h3>
+                <div class="card-meta"> PyData Hamburg | January 2022</div>
+                <p>
+                    Invited talk on gendered health misinformation and how we can use NLP techniques to detect and prevent its spread.
+                </p>
+                <a href="https://youtu.be/ByJIiVF4ZAY?si=APLL9lFsPPPPQ8gs" class="btn">Watch Video</a>
+            </div>
+
+
+            <div class="card">
+                <h3>Invited Talk: Understanding how AI can be used to tackle hate speech online</h3>
+                <div class="card-meta"> PyData Global | December 2021 </div>
+                <p>
+                    Analyzing the challenges and opportunities of using AI to detect and mitigate hate speech online.
+                </p>
+                <a href="https://www.cs.utexas.edu/news/2023/role-domain-specific-pretraining-digital-discourse-analysis" class="btn">Watch Video</a>
+            </div>
+
+            <div class="card">
+                <h3> Invited Talk: Mental Health Matters! Understanding how NLP techniques can be leveraged in the mental health domain </h3>
+                <div class="card-meta"> FruitPunch AI Connect | November 2021</div>
+                <p>
+                    Investigating how NLP techniques can be leveraged to build applications for mental health support and intervention.
+                </p>
+                <a href="https://youtu.be/Iqqn5qapPdo?si=Rotv4zVqgqBfTph_" class="btn"> Watch Video</a>
+            </div>
+
+            <div class="card">
+                <h3>Panel Discussion: The future of AI in Healthcare</h3>
+                <div class="card-meta"> FruitPunch AI Connect | November 2021</div>
+                <p>
+                    Invited to participate in a panel discussion on the future of AI in healthcare, discussing the potential and challenges of using AI to improve healthcare outcomes.
+                </p>
+                <a href="https://youtu.be/FGw2nibHxac?si=RcqN5OSQSOvk2A5F" class="btn">Watch Video</a>
+            </div>
+
+        </div>
+
+        <!-- RESUME PAGE -->
+        <div id="resume" class="page">
+            <h2>Resume</h2>
+            <div class="resume-container">
+                <h3>Download My Resume</h3>
+                <p>View my complete professional experience, education, and accomplishments.</p>
+                <a href="https://drive.google.com/file/d/1Wfs_3o6dX3hcTavn-zQxd4N-uqnb6Swj/view?usp=sharing" target="_blank" class="btn">View Resume (PDF)</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Smriti Singh. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Built with passion for advancing AI research</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
