@@ -632,12 +632,12 @@
 
 <nav>
     <ul>
-        <li><a href="#" onclick="showPage('home')" id="nav-home" class="active-link">Home</a></li>
-        <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
-        <li><a href="#" onclick="showPage('research')" id="nav-research">Research</a></li>
-        <li><a href="#" onclick="showPage('blog')" id="nav-blog">Blog</a></li>
-        <li><a href="#" onclick="showPage('media')" id="nav-media">Media</a></li>
-        <li><a href="#" onclick="showPage('updates')" id="nav-updates">Updates</a></li>
+        <li><a href="#" data-page="home" id="nav-home" class="active-link">Home</a></li>
+        <li><a href="#" data-page="about" id="nav-about">About</a></li>
+        <li><a href="#" data-page="research" id="nav-research">Research</a></li>
+        <li><a href="#" data-page="blog" id="nav-blog">Blog</a></li>
+        <li><a href="#" data-page="media" id="nav-media">Media</a></li>
+        <li><a href="#" data-page="updates" id="nav-updates">Updates</a></li>
     </ul>
 </nav>
 
@@ -655,7 +655,7 @@
                     I build agentic AI systems for production, with a focus on making them reliable, interpretable, and fair.
                 </p>
                 <div class="hero-links">
-                    <a href="#" onclick="showPage('research')" class="pill pill-primary">Research →</a>
+                    <a href="#" data-page="research" class="pill pill-primary">Research →</a>
                     <a href="https://scholar.google.com/citations?hl=en&user=idOI-IAAAAAJ" target="_blank" class="pill pill-outline">Google Scholar</a>
                     <a href="https://www.linkedin.com/in/smriti-singh26" target="_blank" class="pill pill-outline">LinkedIn</a>
                     <a href="#" id="hero-email-link" class="pill pill-outline">Email</a>
@@ -769,7 +769,7 @@
         </div>
 
         <div style="text-align:center; padding-bottom:1rem;">
-            <a href="#" onclick="showPage('about')" class="pill pill-primary">More About Me →</a>
+            <a href="#" data-page="about" class="pill pill-primary">More About Me →</a>
         </div>
     </div>
 
@@ -1219,18 +1219,34 @@
 </footer>
 
 <script>
-    // Assemble email to prevent proxy rewriting
-    var u = 'smritisingh26'; var d = 'utexas.edu';
-    document.getElementById('footer-email').innerHTML = '<a href="mailto:' + u + '@' + d + '" style="color:var(--rose); text-decoration:none;">' + u + '@' + d + '</a>';
-    document.getElementById('hero-email-link').href = 'mailto:' + u + '@' + d;
+    document.addEventListener('DOMContentLoaded', function () {
 
-    function showPage(id) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active-link'));
-        document.getElementById('nav-' + id).classList.add('active-link');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+        // Email assembly
+        var u = 'smritisingh26', d = 'utexas.edu';
+        var emailEl = document.getElementById('footer-email');
+        if (emailEl) emailEl.innerHTML = '<a href="mailto:' + u + '@' + d + '" style="color:var(--rose);text-decoration:none;">' + u + '@' + d + '</a>';
+        var heroEmail = document.getElementById('hero-email-link');
+        if (heroEmail) heroEmail.href = 'mailto:' + u + '@' + d;
+
+        // Page navigation
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+            var target = document.getElementById(id);
+            if (target) target.classList.add('active');
+            document.querySelectorAll('nav a').forEach(function(a) { a.classList.remove('active-link'); });
+            var navLink = document.getElementById('nav-' + id);
+            if (navLink) navLink.classList.add('active-link');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Attach listeners to all data-page links
+        document.querySelectorAll('a[data-page]').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                showPage(this.getAttribute('data-page'));
+            });
+        });
+    });
 </script>
 </body>
 </html>
