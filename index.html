@@ -632,7 +632,7 @@
                     <a href="#" onclick="showPage('research')" class="pill pill-primary">Research →</a>
                     <a href="https://scholar.google.com/citations?hl=en&user=idOI-IAAAAAJ" target="_blank" class="pill pill-outline">Google Scholar</a>
                     <a href="https://www.linkedin.com/in/smriti-singh26" target="_blank" class="pill pill-outline">LinkedIn</a>
-                    <a href="/cdn-cgi/l/email-protection#4d3e203f2439243e24232a257f7b0d383928352c3e63282938" class="pill pill-outline">Email</a>
+                    <a href="mailto:smritisingh26@utexas.edu" class="pill pill-outline">Email</a>
                 </div>
             </div>
         </div>
@@ -645,7 +645,7 @@
         <div class="section-header">
             <h2>What I Build</h2>
             <div class="divider"></div>
-            <p style="margin-top:0.75rem;">Production systems where research-informed engineering makes the difference.</p>
+            <p style="margin-top:0.75rem;">Production systems developed with research-informed engineering .</p>
         </div>
 
         <div class="build-grid">
@@ -1192,7 +1192,14 @@
     <p>&copy; 2026 Smriti Singh &nbsp;·&nbsp; <span>smritisingh26@utexas.edu</span></p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
     function showPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(id).
+        document.getElementById(id).classList.add('active');
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active-link'));
+        document.getElementById('nav-' + id).classList.add('active-link');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>
