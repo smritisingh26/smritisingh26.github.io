@@ -11,16 +11,18 @@
         :root {
             --rose:     #b76e79;
             --rose-lt:  #c9a38c;
+            --rose-bg:  #fdf0f1;
             --sage:     #7a9172;
             --sage-lt:  #9aad8f;
+            --sage-bg:  #eef3ec;
             --ink:      #1c1f26;
             --ink-mid:  #2d3748;
             --ink-soft: #4a5568;
             --ink-mute: #718096;
-            --paper:    #faf9f7;
-            --paper-md: #f4f2ef;
+            --paper:    #f8f6f2;
+            --paper-md: #efe9e0;
             --white:    #ffffff;
-            --border:   #e8e4de;
+            --border:   #e2dbd0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -96,7 +98,7 @@
             gap: 3rem;
             align-items: center;
             padding: 4rem 2.5rem;
-            background: var(--white);
+            background: linear-gradient(135deg, var(--rose-bg) 0%, var(--white) 50%, var(--sage-bg) 100%);
             border-bottom: 1px solid var(--border);
             margin: -3.5rem -2rem 3.5rem;
         }
@@ -199,7 +201,7 @@
         .divider {
             width: 48px;
             height: 3px;
-            background: linear-gradient(90deg, var(--rose), var(--rose-lt));
+            background: linear-gradient(90deg, var(--rose), var(--rose-lt), var(--sage-lt));
             border-radius: 2px;
             margin: 0.75rem 0 0;
         }
@@ -370,7 +372,17 @@
             margin-bottom: 1.25rem;
         }
 
-        .skill-group:last-child { margin-bottom: 0; }
+        .skill-group:nth-child(odd) .skill-tag {
+            background: var(--sage-bg);
+            border-color: #c2d4be;
+            color: var(--sage);
+        }
+
+        .skill-group:nth-child(even) .skill-tag {
+            background: var(--rose-bg);
+            border-color: #e8c4c8;
+            color: var(--rose);
+        }
 
         .skill-group-label {
             font-size: 0.8rem;
@@ -497,7 +509,7 @@
         /* ─── RESEARCH INTERESTS ─── */
         .interest-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
             margin-bottom: 3rem;
         }
@@ -510,9 +522,19 @@
             transition: all 0.2s;
         }
 
+        .interest-card.rose-tint {
+            background: var(--rose-bg);
+            border-color: #e8c4c8;
+        }
+
+        .interest-card.sage-tint {
+            background: var(--sage-bg);
+            border-color: #c2d4be;
+        }
+
         .interest-card:hover {
-            border-color: var(--rose-lt);
-            box-shadow: 0 6px 20px rgba(183,110,121,0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.07);
         }
 
         .interest-card .icon {
@@ -532,6 +554,10 @@
             font-size: 0.875rem;
             color: var(--ink-mute);
             line-height: 1.65;
+        }
+
+        @media (max-width: 600px) {
+            .interest-grid { grid-template-columns: 1fr; }
         }
 
         /* ─── CALLOUT ─── */
@@ -632,7 +658,7 @@
                     <a href="#" onclick="showPage('research')" class="pill pill-primary">Research →</a>
                     <a href="https://scholar.google.com/citations?hl=en&user=idOI-IAAAAAJ" target="_blank" class="pill pill-outline">Google Scholar</a>
                     <a href="https://www.linkedin.com/in/smriti-singh26" target="_blank" class="pill pill-outline">LinkedIn</a>
-                    <a href="mailto:smritisingh26@utexas.edu" class="pill pill-outline">Email</a>
+                    <a href="/cdn-cgi/l/email-protection#86f5ebf4eff2eff5efe8e1eeb4b0c6f3f2e3fee7f5a8e3e2f3" class="pill pill-outline">Email</a>
                 </div>
             </div>
         </div>
@@ -645,7 +671,7 @@
         <div class="section-header">
             <h2>What I Build</h2>
             <div class="divider"></div>
-            <p style="margin-top:0.75rem;">Production systems developed with research-informed engineering .</p>
+            <p style="margin-top:0.75rem;">Production systems where research-informed engineering makes the difference.</p>
         </div>
 
         <div class="build-grid">
@@ -879,22 +905,22 @@
         <h3 style="font-family:'DM Serif Display',serif; font-size:1.3rem; color:var(--ink); margin-bottom:1.25rem;">Research Interests</h3>
 
         <div class="interest-grid">
-            <div class="interest-card">
+            <div class="interest-card rose-tint">
                 <div class="icon">🔍</div>
                 <h4>Alignment × Interpretability</h4>
                 <p>How interpretability techniques can be used to understand, evaluate, and improve alignment, making internal representations and failure modes transparent for safe deployment.</p>
             </div>
-            <div class="interest-card">
+            <div class="interest-card sage-tint">
                 <div class="icon">💡</div>
                 <h4>Emotional Intelligence in AI</h4>
                 <p>Studying affect modeling and social context as alignment components, and how emotional awareness contributes to safer, more human-aligned decision-making in advanced systems.</p>
             </div>
-            <div class="interest-card">
+            <div class="interest-card sage-tint">
                 <div class="icon">⚖️</div>
                 <h4>Fairness & Bias Mitigation</h4>
                 <p>Developing scalable methods to detect and mitigate bias in language and multimodal models, with approaches that promote fairness without compromising real-world performance.</p>
             </div>
-            <div class="interest-card">
+            <div class="interest-card rose-tint">
                 <div class="icon">🧠</div>
                 <h4>Intelligence Evaluation</h4>
                 <p>Examining how different architectures and training regimes converge to similar phenomena, and what this implies for measuring and stress-testing intelligence beyond narrow benchmarks.</p>
@@ -1189,17 +1215,10 @@
 </div><!-- /container -->
 
 <footer>
-    <p>&copy; 2026 Smriti Singh &nbsp;·&nbsp; <span>smritisingh26@utexas.edu</span></p>
+    <p>&copy; 2026 Smriti Singh &nbsp;·&nbsp; <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="76051b041f021f051f18111e4440360302130e170558131203">[email&#160;protected]</a></span></p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     function showPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active-link'));
-        document.getElementById('nav-' + id).classList.add('active-link');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-</script>
-</body>
-</html>
+        document.getElementById(id
